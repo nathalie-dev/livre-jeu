@@ -1,0 +1,27 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+
+
+
+body {
+    background: url(/assets/images/dragon.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+@media screen and (orientation: portrait) 
+{
+    body {
+        background: url(/assets/images/dragon_portrait.jpg) no-repeat center center fixed ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: 100%;
+    }
+}
+
+

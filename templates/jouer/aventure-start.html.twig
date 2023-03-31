@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Le personnage Lucette MARTINEZ commence l'aventure
+{% endblock %}
+
+{% block body %}
+	{{ aventure.description }}
+	<div>
+		<a href='{{path('app_play_aventure',{'idPartie':partie.id,'idEtape':partie.etape.id,'idPersonnage':partie.aventurier.id})}}' class="btn btn-primary">Lancer</a>
+	</div>
+
+{% endblock %}

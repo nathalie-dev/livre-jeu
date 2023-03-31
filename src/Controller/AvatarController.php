@@ -15,7 +15,8 @@ class AvatarController extends AbstractController
 {
     #[Route('/', name: 'app_avatar_index', methods: ['GET'])]
     public function index(AvatarRepository $avatarRepository): Response
-    {
+    { 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('avatar/index.html.twig', [
             'avatars' => $avatarRepository->findAll(),
         ]);
@@ -34,7 +35,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('app_avatar_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('avatar/new.html.twig', [
+        return $this->render('avatar/new.html.twig', [
             'avatar' => $avatar,
             'form' => $form,
         ]);
@@ -60,7 +61,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('app_avatar_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('avatar/edit.html.twig', [
+        return $this->render('avatar/edit.html.twig', [
             'avatar' => $avatar,
             'form' => $form,
         ]);

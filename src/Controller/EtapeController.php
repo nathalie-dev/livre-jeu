@@ -16,6 +16,7 @@ class EtapeController extends AbstractController
     #[Route('/', name: 'app_etape_index', methods: ['GET'])]
     public function index(EtapeRepository $etapeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('etape/index.html.twig', [
             'etapes' => $etapeRepository->findAll(),
         ]);

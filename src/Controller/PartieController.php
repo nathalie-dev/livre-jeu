@@ -15,7 +15,8 @@ class PartieController extends AbstractController
 {
     #[Route('/', name: 'app_partie_index', methods: ['GET'])]
     public function index(PartieRepository $partieRepository): Response
-    {
+    { 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('partie/index.html.twig', [
             'parties' => $partieRepository->findAll(),
         ]);
@@ -34,7 +35,7 @@ class PartieController extends AbstractController
             return $this->redirectToRoute('app_partie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('partie/new.html.twig', [
+        return $this->render('partie/new.html.twig', [
             'partie' => $partie,
             'form' => $form,
         ]);
@@ -60,7 +61,7 @@ class PartieController extends AbstractController
             return $this->redirectToRoute('app_partie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('partie/edit.html.twig', [
+        return $this->render('partie/edit.html.twig', [
             'partie' => $partie,
             'form' => $form,
         ]);

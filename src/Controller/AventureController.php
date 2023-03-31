@@ -16,6 +16,7 @@ class AventureController extends AbstractController
     #[Route('/', name: 'app_aventure_index', methods: ['GET'])]
     public function index(AventureRepository $aventureRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('aventure/index.html.twig', [
             'aventures' => $aventureRepository->findAll(),
         ]);
@@ -34,7 +35,7 @@ class AventureController extends AbstractController
             return $this->redirectToRoute('app_aventure_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('aventure/new.html.twig', [
+        return $this->render('aventure/new.html.twig', [
             'aventure' => $aventure,
             'form' => $form,
         ]);
@@ -60,7 +61,7 @@ class AventureController extends AbstractController
             return $this->redirectToRoute('app_aventure_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('aventure/edit.html.twig', [
+        return $this->render('aventure/edit.html.twig', [
             'aventure' => $aventure,
             'form' => $form,
         ]);

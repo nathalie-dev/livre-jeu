@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Félicitation Melle Clochette vous avez finie la partie et vous  gagnée sa partie haut la main ! {% endblock %}
+
+{% block body %}
+
+le personnage {{ personnage.prenom }} a terminé l'aventure avec succès !!!
+
+{{ etape.getTexteAmbiance() }}
+bravo : <a href="{{ path('app_jouer') }}" >rejouer</a>
+
+{% endblock %}
+
+

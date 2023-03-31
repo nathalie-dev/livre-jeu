@@ -31,14 +31,14 @@ class Etape
     private ?Aventure $finAventure = null;
 
     #[ORM\OneToMany(mappedBy: 'etapePrecedente', targetEntity: Alternative::class)]
-    private Collection $Alternatives;
+    private Collection $alternatives;
 
     #[ORM\OneToMany(mappedBy: 'etape', targetEntity: Partie::class)]
     private Collection $parties;
 
     public function __construct()
     {
-        $this->Alternatives = new ArrayCollection();
+        $this->alternatives = new ArrayCollection();
         $this->parties = new ArrayCollection();
     }
 
@@ -120,15 +120,15 @@ class Etape
     /**
      * @return Collection<int, Alternative>
      */
-    public function getAlternatives(): Collection
+    public function getalternatives(): Collection
     {
-        return $this->Alternatives;
+        return $this->alternatives;
     }
 
     public function addAlternative(Alternative $alternative): self
     {
-        if (!$this->Alternatives->contains($alternative)) {
-            $this->Alternatives->add($alternative);
+        if (!$this->alternatives->contains($alternative)) {
+            $this->alternatives->add($alternative);
             $alternative->setEtapePrecedente($this);
         }
 
@@ -137,7 +137,7 @@ class Etape
 
     public function removeAlternative(Alternative $alternative): self
     {
-        if ($this->Alternatives->removeElement($alternative)) {
+        if ($this->alternatives->removeElement($alternative)) {
             // set the owning side to null (unless already changed)
             if ($alternative->getEtapePrecedente() === $this) {
                 $alternative->setEtapePrecedente(null);

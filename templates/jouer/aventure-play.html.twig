@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Le personnage Melle Clochette joue à la marelle ! {% endblock %}
+
+{% block body %}
+
+{{ etape.getTexteAmbiance() }}
+
+{% for alternative in etape.alternatives %}
+<div><a href='{{path('app_play_aventure',{'idPartie':partie.id,'idEtape':alternative.etapeSuivante.id,'idPersonnage':partie.aventurier.id})}}' class="btn btn-primary">{{ alternative.getTexteAmbiance()  }}</a></div>
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+

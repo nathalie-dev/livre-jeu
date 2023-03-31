@@ -28,6 +28,9 @@ class Personnage
     #[ORM\OneToMany(mappedBy: 'aventurier', targetEntity: Partie::class)]
     private Collection $parties;
 
+    #[ORM\ManyToOne(inversedBy: 'personnages')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
@@ -110,6 +113,18 @@ class Personnage
         return $this->nom;
     
 }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
 }
 

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon livre jeu{% endblock %}
+
+{% block body %}   
+  <div class= "bg-white" >
+    Créer un nouveau personnage
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button>Créer</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

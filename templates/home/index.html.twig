@@ -1,14 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block title %}Hello HomeController!{% endblock %}
 {% block body %}
-<ul>
-<li><a href="{{path('app_avatar_index')}}"> Gérer les avatars</a></li>
-<li><a href="{{path('app_personnage_index')}}"> Gérer les personnages</a></li>
-<li><a href="{{path('app_aventure_index')}}"> Gérer les aventures</a></li>
-<li><a href="{{path('app_etape_index')}}"> Gérer les etapes</a></li>
-<li><a href="{{path('app_alternative_index')}}"> Gérer les alternatives</a></li>
-<li><a href="{{path('app_partie_index')}}"> Gérer les parties</a></li>
+<div class=" row justify-content-evently align-self-center">
+        <div class="col d-flex align-items-center ">
+        {% if is_granted('ROLE_ADMIN') %}, 
+        <a class="link-secondary btn btn-primary btn-lg fs-1" href="{{path('app_admin')}}">Gérer</a>
+         {% endif %}
+        <div class="col d-flex align-items-center ">
+        <a class="link-secondary btn btn-primary btn-lg m-3 fs-1" href="{{path('app_jouer')}}">Jouer</a>
 
-</ul>
+        </div>
+       
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+     
+        <div class="row justify-content-evently align-self-center">
+        <a class="link-secondary btn btn-primary btn-lg w-100 m-1 pl-5 pr-5 fs-1" href="{{path('app_logout')}}">Se deconnecter</a>
+        </div> 
+    
+        {% else %}
+        <div class="row justify-content-evently align-self-center">
+        <a class="link-secondary btn btn-primary btn-lg w-100 m-1 pl-5 pr-5 fs-1" href="{{path('app_login')}}">Se connecter</a>
+         
+        </div>
+        {% endif %}
+
+    </div>  
+    </div>
 {% endblock %}
+
+
 

@@ -16,6 +16,7 @@ class PersonnageController extends AbstractController
     #[Route('/', name: 'app_personnage_index', methods: ['GET'])]
     public function index(PersonnageRepository $personnageRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('personnage/index.html.twig', [
             'personnages' => $personnageRepository->findAll(),
         ]);
@@ -34,7 +35,7 @@ class PersonnageController extends AbstractController
             return $this->redirectToRoute('app_personnage_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('personnage/new.html.twig', [
+        return $this->render('personnage/new.html.twig', [
             'personnage' => $personnage,
             'form' => $form,
         ]);
@@ -60,7 +61,7 @@ class PersonnageController extends AbstractController
             return $this->redirectToRoute('app_personnage_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('personnage/edit.html.twig', [
+        return $this->render('personnage/edit.html.twig', [
             'personnage' => $personnage,
             'form' => $form,
         ]);

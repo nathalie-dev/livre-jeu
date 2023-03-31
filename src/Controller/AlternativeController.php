@@ -16,6 +16,7 @@ class AlternativeController extends AbstractController
     #[Route('/', name: 'app_alternative_index', methods: ['GET'])]
     public function index(AlternativeRepository $alternativeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('alternative/index.html.twig', [
             'alternatives' => $alternativeRepository->findAll(),
         ]);
@@ -34,7 +35,7 @@ class AlternativeController extends AbstractController
             return $this->redirectToRoute('app_alternative_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('alternative/new.html.twig', [
+        return $this->render('alternative/new.html.twig', [
             'alternative' => $alternative,
             'form' => $form,
         ]);
@@ -60,7 +61,7 @@ class AlternativeController extends AbstractController
             return $this->redirectToRoute('app_alternative_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('alternative/edit.html.twig', [
+        return $this->render('alternative/edit.html.twig', [
             'alternative' => $alternative,
             'form' => $form,
         ]);

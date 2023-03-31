@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello JouerController!{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        {% for personnage in personnages %}
+<img src="{{ asset('images/avatars/'~personnage.avatar.getNomFichier())}}">
+                <a href="{{path('app_choix_aventure',{'idPersonnage': personnage.id})}}" >{{ personnage.prenom }} {{ personnage.nom }}</a>
+             
+{% else %}
+                Aucun personnage de trouvé
+                
+    {% endfor %}  
+      </div> <a href="{{path("app_jouer_new")}}">Créer</a>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}
